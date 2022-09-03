@@ -37,87 +37,128 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  List<Group> groups = [];
+  List<Group> groups = [Group(name: "KLPD", size: "7", members: []), Group(name: "Alak", size: "5", members: [])];
 
   @override
   Widget build(BuildContext context) {
     print(groups.length);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+            widget.title,
+          style: TextStyle(
+            color: Colors.black
+          ),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.white24,
       ),
-      body: Column(
-        mainAxisAlignment: groups.isEmpty? MainAxisAlignment.center : MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          if(groups.isEmpty)
-            Center(child: Text("Please add a group")),
+      body: Container(
+        decoration: BoxDecoration(
+          border: Border(top: BorderSide(
+            color: Colors.black,
+            width: 0.5,
+            style: BorderStyle.solid
+          ))
+        ),
+        child: Column(
+          mainAxisAlignment: groups.isEmpty? MainAxisAlignment.center : MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if(groups.isEmpty)
+              Center(child: Text("Please add a group")),
 
-          if(groups.isNotEmpty)
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: groups.length,
-              itemBuilder: (BuildContext context, int index) {
-                return
-                  // CheckboxListTile(value: value, onChanged: onChanged),
-                  ListTile(
-                    leading: Container(
-                      padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                        ),
-                        child: Icon(
-                            Icons.group)
-                    ),
-                    trailing: Text(
-                      groups[index].size,
-                      style: TextStyle(color: Colors.green, fontSize: 15),
-                    ),
-                    title: Text(groups[index].name),
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => addExpense(users: [],)));
-                    },
-                    onLongPress: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text("Delete Group"),
-                          content: Text("Are you sure you want to delete ${groups[index].name}"),
-                          actions: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(14),
-                                    child: const Text("Cancel"),
+            if(groups.isNotEmpty)
+              Padding(
+                padding: EdgeInsets.only(top: 15),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: groups.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return
+                      // CheckboxListTile(value: value, onChanged: onChanged),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                        child: ListTile(
+                          leading: AspectRatio(
+                            aspectRatio: 1,
+                            child: Container(
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: index%2 == 0 ?
+                                    [
+                                      Color(0xFF8F1A00),
+                                      Color(0xFFEF4D2A),
+                                    ]
+                                        :
+                                    [
+                                      Color(0xFF166A00),
+                                      Color(0xFF46D91F)
+                                    ],
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight
                                   ),
+                                  borderRadius: BorderRadius.circular(10)
                                 ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      groups.removeAt(index);
-                                    });
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.all(14),
-                                    child: const Text("Delete"),
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
+                                child: Icon(
+                                    Icons.group,
+                                  color: Colors.white,
+                                )
+                            ),
+                          ),
+                          trailing: Text(
+                            groups[index].size,
+                            style: TextStyle(color: Colors.green, fontSize: 15),
+                          ),
+                          title: Text(groups[index].name),
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => addExpense(users: [],)));
+                          },
+                          onLongPress: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text("Delete Group"),
+                                content: Text("Are you sure you want to delete ${groups[index].name}"),
+                                actions: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.all(14),
+                                          child: const Text("Cancel"),
+                                        ),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            groups.removeAt(index);
+                                          });
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Container(
+                                          padding: const EdgeInsets.all(14),
+                                          child: const Text("Delete"),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            );
+                          },
                         ),
                       );
-                    },
-                  );
 
-              },
-            ),
-        ],
+                  },
+                ),
+              ),
+          ],
+        ),
       ),
       floatingActionButton: Container(
         width: MediaQuery.of(context).size.width*0.45,
@@ -130,6 +171,9 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           },
           style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50),
+            )
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
