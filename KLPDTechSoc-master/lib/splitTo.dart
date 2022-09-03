@@ -31,7 +31,8 @@ class _splitToState extends State<splitTo> {
             shrinkWrap: true,
             itemCount: widget.users.length,
             itemBuilder: (BuildContext context, int index) {
-              return CheckboxListTile(value: value, onChanged: onChanged),
+              return
+                // CheckboxListTile(value: value, onChanged: onChanged),
                 ListTile(
                 leading: const Icon(Icons.list),
                 trailing: const Text(
