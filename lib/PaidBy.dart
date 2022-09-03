@@ -29,7 +29,9 @@ class _paidByState extends State<paidBy> {
                 style: TextStyle(color: Colors.green, fontSize: 15),
               ),
               title: Text("${widget.users[index].name}"),
-              onTap: (){},
+              onTap: (){
+                Navigator.pop(context,widget.users[index]);
+              },
           );
 
         },

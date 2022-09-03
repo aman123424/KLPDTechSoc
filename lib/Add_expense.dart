@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:techsoc_comp/PaidBy.dart';
+import 'package:techsoc_comp/expenseClass.dart';
 import 'package:techsoc_comp/splitTo.dart';
 
 import 'User.dart';
 
 class addExpense extends StatefulWidget {
-  const addExpense({Key? key}) : super(key: key);
-
+  const addExpense({Key? key,required this.users}) : super(key: key);
+  final List<User> users;
   @override
   _addExpenseState createState() => _addExpenseState();
 }
@@ -18,6 +18,9 @@ class _addExpenseState extends State<addExpense> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    List<CheckBoxListTileModel> checkboxList = widget.users.map((x) => CheckBoxListTileModel(name: x.name, isCheck: true) ).toList();
+    late User paidby;
+    late List<User> splitto;
     return Scaffold(
       appBar: AppBar(
         title: Text("Add Expense"),
@@ -71,21 +74,29 @@ class _addExpenseState extends State<addExpense> {
             Row(
               children: [
                 Text("Paid By"),
-                ElevatedButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>paidBy(users: [User(name: "Gregrary")],)));
-                },
-                    child: Text(
-                      "You",
-                ),),
+                ElevatedButton(onPressed: ()async{
+                      dynamic result = await Navigator.push(context, MaterialPageRoute(builder: (context)=>paidBy(users: widget.users)));
+                      paidby = result;
+                    },
+                        child: Text(
+                          "You",
+                    ),
+                ),
                 Text("Split"),
-                ElevatedButton(onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>splitTo(users: [User(name: "Gregrary")],)));
+                ElevatedButton(onPressed: ()async{
+                  dynamic  result = await Navigator.push(context, MaterialPageRoute(builder: (context)=>splitTo(checkboxList: checkboxList,)));
+                  splitto = result;
                 },
                     child: Text(
                       "Equally",
                 )),
               ],
-            )
+            ),
+            ElevatedButton(
+                onPressed: (){
+                  Navigator.pop(context,expense(splitTo: splitto, paidBy: paidby, description: descriptionController.text));
+                },
+                child: Text("Submit"))
           ],
         ),
       ),
