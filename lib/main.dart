@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:techsoc_comp/Add_expense.dart';
 import 'package:techsoc_comp/User.dart';
 import 'package:techsoc_comp/add_group.dart';
 import 'package:techsoc_comp/Group.dart';
+import 'package:techsoc_comp/groupPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     title: Text(groups[index].name),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => addExpense(users: [],)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => groupPage(group: groups[index])));
                     },
                     onLongPress: () {
                       showDialog(

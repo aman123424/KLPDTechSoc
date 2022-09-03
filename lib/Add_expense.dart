@@ -19,8 +19,8 @@ class _addExpenseState extends State<addExpense> {
   @override
   Widget build(BuildContext context) {
     List<CheckBoxListTileModel> checkboxList = widget.users.map((x) => CheckBoxListTileModel(name: x.name, isCheck: true) ).toList();
-    late User paidby;
-    late List<User> splitto;
+    User paidby = User(name: "YOU");
+    List<User> splitto = widget.users;
     return Scaffold(
       appBar: AppBar(
         title: Text("Add Expense"),
@@ -85,6 +85,7 @@ class _addExpenseState extends State<addExpense> {
                 Text("Split"),
                 ElevatedButton(onPressed: ()async{
                   dynamic  result = await Navigator.push(context, MaterialPageRoute(builder: (context)=>splitTo(checkboxList: checkboxList,)));
+                  print(result);
                   splitto = result;
                 },
                     child: Text(
@@ -94,7 +95,7 @@ class _addExpenseState extends State<addExpense> {
             ),
             ElevatedButton(
                 onPressed: (){
-                  Navigator.pop(context,expense(splitTo: splitto, paidBy: paidby, description: descriptionController.text));
+                  Navigator.pop(context,expense(splitTo: splitto, paidBy: paidby, description: descriptionController.text,amount: int.parse(amountController.text)));
                 },
                 child: Text("Submit"))
           ],
