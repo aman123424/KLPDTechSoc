@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:techsoc_comp/Add_expense.dart';
 import 'package:techsoc_comp/User.dart';
 import 'package:techsoc_comp/add_group.dart';
 import 'package:techsoc_comp/Group.dart';
+import 'package:techsoc_comp/groupPage.dart';
 
 void main() {
   runApp(const MyApp());
