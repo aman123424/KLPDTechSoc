@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'Add_expense.dart';
 import 'Group.dart';
 import 'User.dart';
+import 'package:techsoc_comp/groupDetails.dart';
 
 class groupPage extends StatefulWidget {
   const groupPage({Key? key ,required this.group}) : super(key: key);
@@ -19,6 +20,9 @@ class _groupPageState extends State<groupPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.group.name),
+        actions: [
+          IconButton(onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => GroupDetails(members: widget.group.members,)));}, icon: Icon(Icons.group))
+        ],
       ),
       body: Column(
         children: [

@@ -20,7 +20,7 @@ class _AddGroupState extends State<AddGroup> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Group"),
+        title: Text("Add Group",style: TextStyle(color: Colors.black),),
       ),
       body: Form(
         key: groupFormKey,
