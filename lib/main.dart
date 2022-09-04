@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:techsoc_comp/User.dart';
 import 'package:techsoc_comp/add_group.dart';
@@ -39,7 +41,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  List<Group> groups = [Group(name: "KLPD", size: "7", members: []), Group(name: "Alak", size: "5", members: [])];
+  List<Group> groups = [Group(name: "KLPD", size: "7", members: [], expenses: []), Group(name: "Alak", size: "5", members: [], expenses: [])];
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,10 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if(groups.isEmpty)
-              Center(child: Text("Please add a group")),
+              Center(child: Text("Please add a group",style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 30,
+              ),)),
 
             if(groups.isNotEmpty)
               Padding(
@@ -179,15 +184,21 @@ class _MyHomePageState extends State<MyHomePage> {
             });
           },
           style: ElevatedButton.styleFrom(
+            primary: Colors.grey[400],
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50),
+              side: BorderSide(
+                color: Colors.black,
+                width: 0.5,
+                style: BorderStyle.solid
+              )
             )
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
-              Icon(Icons.group_add_outlined),
-              Text("Add Group"),
+              Icon(Icons.group_add_outlined,color: Colors.black,),
+              Text("Add Group",style: TextStyle(color: Colors.black),),
             ],
           ),
         ),

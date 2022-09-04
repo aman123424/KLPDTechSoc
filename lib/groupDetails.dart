@@ -134,15 +134,21 @@ class _GroupDetailsState extends State<GroupDetails> {
             });
           },
           style: ElevatedButton.styleFrom(
+              primary: Colors.grey[400],
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(50),
+                  side: BorderSide(
+                      color: Colors.black,
+                      width: 0.5,
+                      style: BorderStyle.solid
+                  )
               )
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
-              Icon(Icons.person_add),
-              Text("Add Member"),
+              Icon(Icons.person_add,color: Colors.black,),
+              Text("Add Member",style: TextStyle(color: Colors.black),),
             ],
           ),
         ),
