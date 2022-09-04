@@ -48,6 +48,8 @@ class _splitToState extends State<splitTo> {
                         print("set state");
                       checkboxList[index].isCheck = value!;
                     });
+                      print("${checkboxList[index].name}");
+                      print(checkboxList[index].isCheck);
                   },
                   );
                 }
@@ -57,6 +59,7 @@ class _splitToState extends State<splitTo> {
           ElevatedButton(onPressed: (){
             for (int i = 0 ;i<checkboxList.length;i++){
               if (checkboxList[i].isCheck){
+                print(checkboxList[i].name);
                  selectedUsers.add(User(name: checkboxList[i].name));
               }
             }

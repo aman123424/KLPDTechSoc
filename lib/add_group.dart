@@ -72,7 +72,7 @@ class _AddGroupState extends State<AddGroup> {
                 child: ElevatedButton(
                     onPressed: () {
                       if(groupFormKey.currentState!.validate()){
-                        Navigator.pop(context,Group(name: nameController.text, size: sizeController.text, members: []));
+                        Navigator.pop(context,Group(name: nameController.text, size: sizeController.text, members: [], expenses: []));
                       }
                     },
                     child: Text("Add")
