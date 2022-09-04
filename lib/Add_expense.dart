@@ -86,7 +86,8 @@ class _addExpenseState extends State<addExpense> {
                 ElevatedButton(onPressed: ()async{
                   dynamic  result = await Navigator.push(context, MaterialPageRoute(builder: (context)=>splitTo(checkboxList: checkboxList,)));
                   print(result);
-                  splitto = result;
+                  splitto = result as List<User>;
+                  print(splitto);
                 },
                     child: Text(
                       "Equally",

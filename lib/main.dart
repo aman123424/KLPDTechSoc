@@ -37,7 +37,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  List<Group> groups = [];
+  List<Group> groups = [Group(name: "hgdhagd", size: "8", members: [User(name: "YOU"),User(name: "Tabjf"),User(name: "dahyfvfu")],expenses: [])];
 
   @override
   Widget build(BuildContext context) {
